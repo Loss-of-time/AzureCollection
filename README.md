@@ -1,6 +1,3 @@
-以下是一个适合合作伙伴的 `README.md` 文件示例：
-
-```markdown
 # 项目名称：AzureCollection
 
 ## 项目简介
@@ -87,5 +84,3 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 ### 实际
 如果你能直接联系到我，请告知我将你添加为合作者，这样你就可以直接提交代码了。
-
-```
