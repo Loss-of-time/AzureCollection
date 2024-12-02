@@ -11,7 +11,8 @@ public class UserEntityListener {
         LocalDateTime now = LocalDateTime.now();
         user.setCreatedAt(now);
         user.setUpdatedAt(now);
-        user.setBlockchainId(generateBlockchainId());
+        user.setBlockchainId(User.generateBlockchainId(user.getUsername()));
+        user.setPasswordHash(User.hashPassword(user.getPasswordHash()));
     }
 
     @PreUpdate
@@ -19,8 +20,5 @@ public class UserEntityListener {
         user.setUpdatedAt(LocalDateTime.now());
     }
 
-    private String generateBlockchainId() {
-        // TODO 实现blockchainId生成逻辑
-        return "blockchain" + System.currentTimeMillis();
-    }
+
 }

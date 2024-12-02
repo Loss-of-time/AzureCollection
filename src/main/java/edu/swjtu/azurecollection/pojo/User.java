@@ -32,7 +32,6 @@ public class User {
     private List<DigitalCollectible> collectibles;
 
     // Getters and Setters
-
     public Long getUserId() {
         return userId;
     }
@@ -118,5 +117,15 @@ public class User {
                 ", updatedAt=" + updatedAt +
                 ", collectibles=" + collectibles +
                 '}';
+    }
+
+    public static String hashPassword(String password) {
+        // TODO 实现passwordHash生成逻辑
+        return password;
+    }
+
+    public static String generateBlockchainId(String username) {
+        // TODO 实现blockchainId生成逻辑
+        return "blockchain" + System.currentTimeMillis();
     }
 }
