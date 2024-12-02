@@ -22,15 +22,14 @@ public class UserService implements IUserService {
     @Override
     public User updateUser(Long userId, User user) {
         Optional<User> existingUser = userRepository.findById(userId);
-        if (existingUser.isPresent()) {
-            User updatedUser = existingUser.get();
-            updatedUser.setUsername(user.getUsername());
-            updatedUser.setEmail(user.getEmail());
-            updatedUser.setPhone(user.getPhone());
-            // Add more fields as needed
-            return userRepository.save(updatedUser);
+        if (existingUser.isEmpty()) {
+            return null;
         }
-        return null;
+        User updatedUser = existingUser.get();
+        updatedUser.setUsername(user.getUsername());
+        updatedUser.setEmail(user.getEmail());
+        updatedUser.setPhone(user.getPhone());
+        return userRepository.save(updatedUser);
     }
 
     @Override
