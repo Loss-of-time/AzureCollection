@@ -1,9 +1,10 @@
 package edu.swjtu.azurecollection.controller;
 
+import edu.swjtu.azurecollection.pojo.ResponseMessage;
 import edu.swjtu.azurecollection.pojo.User;
 import edu.swjtu.azurecollection.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,34 +18,37 @@ public class UserController {
     private IUserService userService;
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseMessage<User> createUser(@RequestBody User user) {
         // TODO 接收密码而不是密码的哈希
-        return ResponseEntity.ok(userService.createUser(user));
+        User createdUser = userService.createUser(user);
+        return ResponseMessage.success(createdUser);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
+    public ResponseMessage<User> updateUser(@PathVariable Long id, @RequestBody User user) {
         User updatedUser = userService.updateUser(id, user);
         if (updatedUser != null) {
-            return ResponseEntity.ok(updatedUser);
+            return ResponseMessage.success(updatedUser);
         }
-        return ResponseEntity.notFound().build();
+        return new ResponseMessage<>(HttpStatus.NOT_FOUND.value(), "User not found", null);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+    public ResponseMessage<Void> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
-        return ResponseEntity.noContent().build();
+        return new ResponseMessage<>(HttpStatus.NO_CONTENT.value(), "User deleted", null);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+    public ResponseMessage<User> getUserById(@PathVariable Long id) {
         Optional<User> user = userService.getUserById(id);
-        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return user.map(ResponseMessage::success)
+                .orElseGet(() -> new ResponseMessage<>(HttpStatus.NOT_FOUND.value(), "User not found", null));
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
-        return ResponseEntity.ok(userService.getAllUsers());
+    public ResponseMessage<List<User>> getAllUsers() {
+        List<User> users = userService.getAllUsers();
+        return ResponseMessage.success(users);
     }
 }
