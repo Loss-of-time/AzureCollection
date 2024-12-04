@@ -10,8 +10,8 @@ public class DigitalCollectible {
     private Long collectibleId;
 
     @ManyToOne
-    @JoinColumn(name = "creator_id", nullable = false)
-    private User creator;
+    @JoinColumn(name = "owner_id", nullable = false)
+    private User owner;
 
     private String name;
     private String description;
@@ -37,12 +37,12 @@ public class DigitalCollectible {
         this.collectibleId = collectibleId;
     }
 
-    public User getCreator() {
-        return creator;
+    public User getOwner() {
+        return owner;
     }
 
-    public void setCreator(User creator) {
-        this.creator = creator;
+    public void setOwner(User creator) {
+        this.owner = creator;
     }
 
     public String getName() {
@@ -97,7 +97,7 @@ public class DigitalCollectible {
     public String toString() {
         return "DigitalCollectible{" +
                 "collectibleId=" + collectibleId +
-                ", creator=" + creator +
+                ", creator=" + owner +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", metadata='" + metadata + '\'' +
