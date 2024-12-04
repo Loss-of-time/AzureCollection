@@ -2,6 +2,7 @@ package edu.swjtu.azurecollection.controller;
 
 import edu.swjtu.azurecollection.pojo.DigitalCollectible;
 import edu.swjtu.azurecollection.pojo.ResponseMessage;
+import edu.swjtu.azurecollection.pojo.User;
 import edu.swjtu.azurecollection.service.IDigitalCollectibleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -49,5 +50,12 @@ public class DigitalCollectibleController {
     public ResponseMessage<List<DigitalCollectible>> getAllCollectibles() {
         List<DigitalCollectible> collectibles = collectibleService.getAllCollectibles();
         return ResponseMessage.success(collectibles);
+    }
+
+    // 获取 collectible 的 owner
+    @GetMapping("/{id}/owner")
+    public ResponseMessage<User> getOwner(@PathVariable Long id) {
+        User owner = collectibleService.getOwner(id);
+        return ResponseMessage.success(owner);
     }
 }

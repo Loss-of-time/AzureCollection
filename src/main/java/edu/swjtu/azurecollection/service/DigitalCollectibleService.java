@@ -1,6 +1,7 @@
 package edu.swjtu.azurecollection.service;
 
 import edu.swjtu.azurecollection.pojo.DigitalCollectible;
+import edu.swjtu.azurecollection.pojo.User;
 import edu.swjtu.azurecollection.repository.DigitalCollectibleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,5 +48,10 @@ public class DigitalCollectibleService implements IDigitalCollectibleService {
     @Override
     public List<DigitalCollectible> getAllCollectibles() {
         return collectibleRepository.findAll();
+    }
+
+    @Override
+    public User getOwner(Long id) {
+        return collectibleRepository.findById(id).get().getOwner();
     }
 }

@@ -1,6 +1,7 @@
 package edu.swjtu.azurecollection.service;
 
 import edu.swjtu.azurecollection.pojo.DigitalCollectible;
+import edu.swjtu.azurecollection.pojo.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,4 +12,5 @@ public interface IDigitalCollectibleService {
     void deleteCollectible(Long collectibleId);
     Optional<DigitalCollectible> getCollectibleById(Long collectibleId);
     List<DigitalCollectible> getAllCollectibles();
+    User getOwner(Long id);
 }
