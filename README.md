@@ -4,13 +4,31 @@
 
 AzureCollection 是一个基于 Spring Boot 的数字收藏品管理系统，支持用户创建、管理和展示数字收藏品。
 
-## 技术栈
+## 运行
 
-- Java 21
-- Spring Boot 3.4.0
-- Gradle
-- MySQL
-- JPA (Java Persistence API)
+1. 安装 Java 21
+2. 安装 MySQL 并创建数据库 `AC_db`
+3. 创建 `src/main/resources/application.properties` 文件中的数据库连接信息
+例：
+```properties
+spring.application.name=AzureCollection
+server.port=1234
+
+spring.datasource.url=jdbc:mysql://localhost:3306/AC_db?severTimezone=UTC
+spring.datasource.username=root
+spring.datasource.password=2890
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# Show SQL in console
+spring.jpa.show-sql=true
+
+# Format SQL in console
+spring.jpa.properties.hibernate.format_sql=true
+
+# Auto generate table
+spring.jpa.hibernate.ddl-auto=update
+
+```
 
 ## 项目结构
 
@@ -22,33 +40,6 @@ AzureCollection 是一个基于 Spring Boot 的数字收藏品管理系统，支
 - `src/main/resources`：资源文件目录
   - `application.properties`：应用程序配置文件
 - `build.gradle.kts`：Gradle 构建脚本
-
-## 环境配置
-
-1. 安装 Java 21
-2. 安装 MySQL 并创建数据库 `AC_db`
-3. 配置 `src/main/resources/application.properties` 文件中的数据库连接信息
-
-```ini
-spring.datasource.url=jdbc:mysql://localhost:3306/AC_db?severTimezone=UTC
-spring.datasource.username=root
-spring.datasource.password=2890
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-```
-
-## 构建和运行
-
-1. 使用以下命令构建项目：
-
-```sh
-./gradlew build
-```
-
-2. 使用以下命令运行项目：
-
-```sh
-./gradlew bootRun
-```
 
 ## API 端点
 
@@ -73,14 +64,6 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 }
 ```
 
-## 贡献指南
+## 贡献
 
-### 理论上
-1. Fork 本仓库
-2. 创建新分支 (`git checkout -b feature-branch`)
-3. 提交更改 (`git commit -m 'Add some feature'`)
-4. 推送到分支 (`git push origin feature-branch`)
-5. 创建 Pull Request
-
-### 实际
 如果你能直接联系到我，请告知我将你添加为合作者，这样你就可以直接提交代码了。

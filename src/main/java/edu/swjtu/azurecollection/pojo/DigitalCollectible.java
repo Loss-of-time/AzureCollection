@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@EntityListeners(DigitalCollectibleListener.class)
 public class DigitalCollectible {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
