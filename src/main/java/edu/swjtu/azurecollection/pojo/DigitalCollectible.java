@@ -18,6 +18,9 @@ public class DigitalCollectible {
     private String name;
     private String description;
 
+    @Column(nullable = false)
+    private Double price;
+
     @Lob
     private String metadata;
 
@@ -57,6 +60,14 @@ public class DigitalCollectible {
 
     public String getDescription() {
         return description;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public void setDescription(String description) {
