@@ -2,6 +2,7 @@ package edu.swjtu.azurecollection.controller;
 
 import edu.swjtu.azurecollection.pojo.ResponseMessage;
 import edu.swjtu.azurecollection.pojo.User;
+import edu.swjtu.azurecollection.pojo.dto.UserLoginDto;
 import edu.swjtu.azurecollection.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +14,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-
     @Autowired
     private IUserService userService;
 
@@ -50,5 +50,14 @@ public class UserController {
     public ResponseMessage<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
         return ResponseMessage.success(users);
+    }
+
+    @PostMapping("/login")
+    public ResponseMessage<User> login(@RequestBody UserLoginDto userLoginDto) {
+        User user = userService.isLoginValid(userLoginDto);
+        if (user != null) {
+            return ResponseMessage.success(user);
+        }
+        return new ResponseMessage<>(HttpStatus.UNAUTHORIZED.value(), "Login failed", null);
     }
 }

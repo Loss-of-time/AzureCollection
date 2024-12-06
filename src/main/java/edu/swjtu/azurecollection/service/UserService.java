@@ -1,6 +1,7 @@
 package edu.swjtu.azurecollection.service;
 
 import edu.swjtu.azurecollection.pojo.User;
+import edu.swjtu.azurecollection.pojo.dto.UserLoginDto;
 import edu.swjtu.azurecollection.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,14 @@ public class UserService implements IUserService {
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public User isLoginValid(UserLoginDto userLoginDto) {
+        User user = userRepository.findUserByEmail(userLoginDto.getEmail());
+        if (user != null && user.getPasswordHash().equals(userLoginDto.getPassword())) {
+            return user;
+        }
+        return null;
     }
 }

@@ -4,7 +4,10 @@ import edu.swjtu.azurecollection.pojo.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    // Custom query methods (if needed) can be added here
+    User findUserByEmail(String email);
+    Long findUserIdByEmail(String email);
 }
