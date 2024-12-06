@@ -27,11 +27,13 @@ public class DigitalCollectibleService implements IDigitalCollectibleService {
             return null;
         }
         DigitalCollectible updatedCollectible = existingCollectible.get();
-        updatedCollectible.setName(collectible.getName());
-        updatedCollectible.setDescription(collectible.getDescription());
-        updatedCollectible.setMetadata(collectible.getMetadata());
-        updatedCollectible.setStatus(collectible.getStatus());
-        updatedCollectible.setVerificationStatus(collectible.getVerificationStatus());
+//        updatedCollectible.setName(collectible.getName());
+//        updatedCollectible.setDescription(collectible.getDescription());
+//        updatedCollectible.setMetadata(collectible.getMetadata());
+//        updatedCollectible.setStatus(collectible.getStatus());
+//        updatedCollectible.setVerificationStatus(collectible.getVerificationStatus());
+//        updatedCollectible.setOwner(collectible.getOwner());
+        org.springframework.beans.BeanUtils.copyProperties(collectible, updatedCollectible, "collectibleId");
         return collectibleRepository.save(updatedCollectible);
     }
 

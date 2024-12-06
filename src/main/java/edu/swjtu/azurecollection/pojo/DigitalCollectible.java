@@ -1,6 +1,8 @@
 package edu.swjtu.azurecollection.pojo;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -13,7 +15,8 @@ public class DigitalCollectible {
 
     @ManyToOne
     @JoinColumn(name = "owner_id", nullable = false)
-    @JsonBackReference
+    @JsonIdentityInfo(generator = com.fasterxml.jackson.annotation.ObjectIdGenerators.PropertyGenerator.class, property = "userId")
+    @JsonIdentityReference(alwaysAsId = true)
     private User owner;
 
     private String name;

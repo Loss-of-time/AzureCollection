@@ -28,7 +28,8 @@ public class User {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "owner_id")
     private List<DigitalCollectible> collectibles;
 
     // Getters and Setters
