@@ -60,4 +60,15 @@ public class DigitalCollectibleService implements IDigitalCollectibleService {
     public User getOwner(Long id) {
         return collectibleRepository.findById(id).get().getOwner();
     }
+
+    @Override
+    public DigitalCollectible updateStatus(Long collectibleId, String status) {
+        Optional<DigitalCollectible> existingCollectible = collectibleRepository.findById(collectibleId);
+        if (existingCollectible.isEmpty()) {
+            return null;
+        }
+        DigitalCollectible collectible = existingCollectible.get();
+        collectible.setStatus(status);
+        return collectibleRepository.save(collectible);
+    }
 }

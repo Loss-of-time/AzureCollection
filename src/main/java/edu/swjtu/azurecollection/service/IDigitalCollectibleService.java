@@ -14,4 +14,6 @@ public interface IDigitalCollectibleService {
     Optional<DigitalCollectible> getCollectibleById(Long collectibleId);
     List<DigitalCollectible> getAllCollectibles();
     User getOwner(Long id);
+
+    DigitalCollectible updateStatus(Long id, String status);
 }

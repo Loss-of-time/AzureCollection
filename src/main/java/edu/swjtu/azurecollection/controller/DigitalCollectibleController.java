@@ -59,4 +59,13 @@ public class DigitalCollectibleController {
         User owner = collectibleService.getOwner(id);
         return ResponseMessage.success(owner);
     }
+
+    @PutMapping("/{id}/status")
+    public ResponseMessage<DigitalCollectible> updateStatus(@PathVariable Long id, @RequestBody DigitalCollectibleStatus status) {
+        DigitalCollectible updatedCollectible = collectibleService.updateStatus(id, status.getStatus());
+        if (updatedCollectible != null) {
+            return ResponseMessage.success(updatedCollectible);
+        }
+        return new ResponseMessage<>(HttpStatus.NOT_FOUND.value(), "Collectible not found", null);
+    }
 }
