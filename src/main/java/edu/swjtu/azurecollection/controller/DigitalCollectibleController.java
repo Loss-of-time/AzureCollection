@@ -3,6 +3,7 @@ package edu.swjtu.azurecollection.controller;
 import edu.swjtu.azurecollection.pojo.DigitalCollectible;
 import edu.swjtu.azurecollection.pojo.ResponseMessage;
 import edu.swjtu.azurecollection.pojo.User;
+import edu.swjtu.azurecollection.pojo.dto.DigitalCollectibleDto;
 import edu.swjtu.azurecollection.service.IDigitalCollectibleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,13 +20,13 @@ public class DigitalCollectibleController {
     private IDigitalCollectibleService collectibleService;
 
     @PostMapping
-    public ResponseMessage<DigitalCollectible> createCollectible(@RequestBody DigitalCollectible collectible) {
+    public ResponseMessage<DigitalCollectible> createCollectible(@RequestBody DigitalCollectibleDto collectible) {
         DigitalCollectible createdCollectible = collectibleService.createCollectible(collectible);
         return ResponseMessage.success(createdCollectible);
     }
 
     @PutMapping("/{id}")
-    public ResponseMessage<DigitalCollectible> updateCollectible(@PathVariable Long id, @RequestBody DigitalCollectible collectible) {
+    public ResponseMessage<DigitalCollectible> updateCollectible(@PathVariable Long id, @RequestBody DigitalCollectibleDto collectible) {
         DigitalCollectible updatedCollectible = collectibleService.updateCollectible(id, collectible);
         if (updatedCollectible != null) {
             return ResponseMessage.success(updatedCollectible);

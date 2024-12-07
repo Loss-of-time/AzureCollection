@@ -2,7 +2,9 @@ package edu.swjtu.azurecollection.service;
 
 import edu.swjtu.azurecollection.pojo.DigitalCollectible;
 import edu.swjtu.azurecollection.pojo.User;
+import edu.swjtu.azurecollection.pojo.dto.DigitalCollectibleDto;
 import edu.swjtu.azurecollection.repository.DigitalCollectibleRepository;
+import edu.swjtu.azurecollection.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,26 +16,28 @@ public class DigitalCollectibleService implements IDigitalCollectibleService {
 
     @Autowired
     private DigitalCollectibleRepository collectibleRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
-    public DigitalCollectible createCollectible(DigitalCollectible collectible) {
+    public DigitalCollectible createCollectible(DigitalCollectibleDto collectibleDto) {
+        DigitalCollectible collectible = new DigitalCollectible();
+        org.springframework.beans.BeanUtils.copyProperties(collectibleDto, collectible, "collectibleId", "owner");
+        User owner = userRepository.findUserByUserId(collectibleDto.getOwner());
+        collectible.setOwner(owner);
         return collectibleRepository.save(collectible);
     }
 
     @Override
-    public DigitalCollectible updateCollectible(Long collectibleId, DigitalCollectible collectible) {
+    public DigitalCollectible updateCollectible(Long collectibleId, DigitalCollectibleDto collectibleDto) {
         Optional<DigitalCollectible> existingCollectible = collectibleRepository.findById(collectibleId);
         if (existingCollectible.isEmpty()) {
             return null;
         }
         DigitalCollectible updatedCollectible = existingCollectible.get();
-//        updatedCollectible.setName(collectible.getName());
-//        updatedCollectible.setDescription(collectible.getDescription());
-//        updatedCollectible.setMetadata(collectible.getMetadata());
-//        updatedCollectible.setStatus(collectible.getStatus());
-//        updatedCollectible.setVerificationStatus(collectible.getVerificationStatus());
-//        updatedCollectible.setOwner(collectible.getOwner());
-        org.springframework.beans.BeanUtils.copyProperties(collectible, updatedCollectible, "collectibleId");
+        org.springframework.beans.BeanUtils.copyProperties(collectibleDto, updatedCollectible, "collectibleId", "owner");
+        User owner = userRepository.findUserByUserId(collectibleDto.getOwner());
+        updatedCollectible.setOwner(owner);
         return collectibleRepository.save(updatedCollectible);
     }
 
