@@ -32,6 +32,8 @@ public class User {
     @JoinColumn(name = "owner_id")
     private List<DigitalCollectible> collectibles;
 
+    private Double balance;
+
     // Getters and Setters
     public Long getUserId() {
         return userId;
@@ -105,18 +107,24 @@ public class User {
         this.collectibles = collectibles;
     }
 
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "userId=" + userId +
                 ", username='" + username + '\'' +
-                ", passwordHash='" + passwordHash + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", blockchainId='" + blockchainId + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
                 ", collectibles=" + collectibles +
+                ", balance=" + balance +
                 '}';
     }
 

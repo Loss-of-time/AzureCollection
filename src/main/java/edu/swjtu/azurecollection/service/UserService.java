@@ -3,6 +3,7 @@ package edu.swjtu.azurecollection.service;
 import edu.swjtu.azurecollection.pojo.User;
 import edu.swjtu.azurecollection.pojo.dto.UserLoginDto;
 import edu.swjtu.azurecollection.repository.UserRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,5 +56,13 @@ public class UserService implements IUserService {
             return user;
         }
         return null;
+    }
+
+    @Override
+    public User authenticate(UserLoginDto userLoginDto) {
+        return userRepository.findByEmail(userLoginDto.getEmail())
+                .filter(u -> u.getPasswordHash().equals(userLoginDto.getPassword()))
+                .orElse(null);
+
     }
 }

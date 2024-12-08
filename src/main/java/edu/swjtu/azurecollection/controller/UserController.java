@@ -4,6 +4,7 @@ import edu.swjtu.azurecollection.pojo.ResponseMessage;
 import edu.swjtu.azurecollection.pojo.User;
 import edu.swjtu.azurecollection.pojo.dto.UserLoginDto;
 import edu.swjtu.azurecollection.service.IUserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -53,11 +54,26 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseMessage<User> login(@RequestBody UserLoginDto userLoginDto) {
-        User user = userService.isLoginValid(userLoginDto);
-        if (user != null) {
-            return ResponseMessage.success(user);
-        }
-        return new ResponseMessage<>(HttpStatus.UNAUTHORIZED.value(), "Login failed", null);
+    public ResponseMessage<String> login(@RequestBody UserLoginDto userLoginDto, HttpSession session) {
+        User user = userService.authenticate(userLoginDto);
+        if(user == null)
+            return new ResponseMessage<>(HttpStatus.UNAUTHORIZED.value(), "Login failed", null);
+
+        session.setAttribute("userId", user.getUserId());
+        return ResponseMessage.success("Login successful");
+    }
+
+    @PostMapping("/logout")
+    public ResponseMessage<String> logout(HttpSession session) {
+        session.removeAttribute("userId");
+        return ResponseMessage.success("Logout successful");
+    }
+
+    @PostMapping("/session")
+    public ResponseMessage<Long> getSessionUser(HttpSession session) {
+        Long userId = (Long) session.getAttribute("userId");
+        if(userId == null)
+            return new ResponseMessage<>(HttpStatus.UNAUTHORIZED.value(), "Not logged in", null);
+        return ResponseMessage.success(userId);
     }
 }
