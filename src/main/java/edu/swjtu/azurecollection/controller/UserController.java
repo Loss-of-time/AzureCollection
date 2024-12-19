@@ -56,9 +56,11 @@ public class UserController {
     @PostMapping("/login")
     public ResponseMessage<String> login(@RequestBody UserLoginDto userLoginDto, HttpSession session) {
         User user = userService.authenticate(userLoginDto);
-        if(user == null)
+        if(user == null) {
+            session.setAttribute("userId", user.getUserId());
             return new ResponseMessage<>(HttpStatus.UNAUTHORIZED.value(), "Login failed", null);
 
+        }
         session.setAttribute("userId", user.getUserId());
         return ResponseMessage.success("Login successful");
     }
