@@ -1,36 +1,25 @@
-package edu.swjtu.azurecollection.pojo;
+package edu.swjtu.azurecollection.pojo.dto;
 
-import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
-@Table(name="Tansaction")
-@Entity
-public class Transaction {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="transaction_Id")
+public class TransactionDto {
     private Long transactionId;
 
-
-    @Column(name = "collectible_id")
     private Long collectibleId;
 
-    @Column(name = "buyer_id")
     private Long buyerId;
 
-    @Column(name = "seller_id")
     private Long sellerId;
 
-    @Column(name = "transaction_time", nullable = false)
     private LocalDateTime transactionDate;
 
 
     // 新增的两个布尔型变量
-    @Column(name = "if_read_by_buyer")
     private Integer ifReadByBuyer;
 
-    @Column(name = "if_read_by_seller")
     private Integer ifReadBySeller;
+
 
     public Long getTransactionId() {
         return transactionId;
@@ -56,6 +45,22 @@ public class Transaction {
         this.buyerId = buyerId;
     }
 
+    public Long getSellerId() {
+        return sellerId;
+    }
+
+    public void setSellerId(Long sellerId) {
+        this.sellerId = sellerId;
+    }
+
+    public LocalDateTime getTransactionDate() {
+        return transactionDate;
+    }
+
+    public void setTransactionDate(LocalDateTime transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
     public int getIfReadByBuyer() {
         return ifReadByBuyer;
     }
@@ -72,25 +77,9 @@ public class Transaction {
         this.ifReadBySeller = ifReadBySeller;
     }
 
-    public LocalDateTime getTransactionDate() {
-        return transactionDate;
-    }
-
-    public void setTransactionDate(LocalDateTime transactionDate) {
-        this.transactionDate = transactionDate;
-    }
-
-    public Long getSellerId() {
-        return sellerId;
-    }
-
-    public void setSellerId(Long sellerId) {
-        this.sellerId = sellerId;
-    }
-
     @Override
     public String toString() {
-        return "Transaction{" +
+        return "TransactionDto{" +
                 "transactionId=" + transactionId +
                 ", collectibleId=" + collectibleId +
                 ", buyerId=" + buyerId +
