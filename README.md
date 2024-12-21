@@ -75,3 +75,27 @@ spring.jpa.hibernate.ddl-auto=update
 如果你能直接联系到我，请告知我将你添加为合作者，这样你就可以直接提交代码了。
 ## 1
  a test from PC
+
+
+
+## 初始化环境
+
+### 安装gradle
+#### 先安装 Scoop（如果还没有安装）
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+irm get.scoop.sh | iex
+
+#### 然后安装 Gradle
+scoop install gradle
+
+检查版本
+```
+gradle -v
+```
+
+清理并构建项目
+```
+gradle clean build
+```
+
+
