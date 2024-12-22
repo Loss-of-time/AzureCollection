@@ -2,7 +2,6 @@ package edu.swjtu.azurecollection.controller;
 
 import edu.swjtu.azurecollection.pojo.ResponseMessage;
 import edu.swjtu.azurecollection.pojo.dto.TransactionDto;
-import edu.swjtu.azurecollection.service.TransactionServices;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +9,6 @@ import edu.swjtu.azurecollection.pojo.Transaction;
 import edu.swjtu.azurecollection.service.ITransactionServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 
 
 @RestController //接口方法返回对象 转化为json文本
@@ -24,11 +22,12 @@ public class TransactionController {
     //add
     @PostMapping
     public ResponseMessage<Transaction> add(@RequestBody TransactionDto transaction) {
+        System.out.println("Received transaction date controller layer: " + transaction.getTransactionDate());
         Transaction newTrans= transactionServices.add(transaction);
         return ResponseMessage.success(newTrans);
     }
-    //find
-    @GetMapping("/{buyerId}")
+    //find by Id
+    @GetMapping("/{Id}")
     public ResponseMessage<Transaction> get(@PathVariable Long collectionId) {
         Transaction newTrans=transactionServices.get(collectionId);
         return ResponseMessage.success(newTrans);
@@ -36,12 +35,18 @@ public class TransactionController {
     //public ResponseEntity<Transaction> createTransaction(@RequestBody Transaction transaction) {}
 
     //change
-    @PutMapping
+    @PutMapping("/change")
     public ResponseMessage<Transaction> edit(@Validated @RequestBody TransactionDto transaction) {
         Transaction newTrans=transactionServices.edit(transaction);
         return ResponseMessage.success(newTrans);
     }
 
+    //get all
+    @GetMapping
+    public ResponseMessage<Iterable<Transaction>> getAllTransaction() {
+        Iterable<Transaction> Transactions = transactionServices.getAllTransactions();
+        return ResponseMessage.success(Transactions);
+    }
     //del
 
 

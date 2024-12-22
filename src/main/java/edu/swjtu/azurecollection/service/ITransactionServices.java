@@ -10,4 +10,6 @@ public interface ITransactionServices {
 
 
     Transaction edit(TransactionDto transaction);
+
+    Iterable<Transaction> getAllTransactions();
 }

@@ -22,7 +22,7 @@ public class Transaction {
     private Long sellerId;
 
     @Column(name = "transaction_time", nullable = false)
-    private LocalDateTime transactionDate;
+    private String transactionDate;
 
 
     // 新增的两个布尔型变量
@@ -72,12 +72,20 @@ public class Transaction {
         this.ifReadBySeller = ifReadBySeller;
     }
 
-    public LocalDateTime getTransactionDate() {
+    public void setIfReadByBuyer(Integer ifReadByBuyer) {
+        this.ifReadByBuyer = ifReadByBuyer;
+    }
+
+    public String getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(LocalDateTime transactionDate) {
+    public void setTransactionDate(String transactionDate) {
         this.transactionDate = transactionDate;
+    }
+
+    public void setIfReadBySeller(Integer ifReadBySeller) {
+        this.ifReadBySeller = ifReadBySeller;
     }
 
     public Long getSellerId() {

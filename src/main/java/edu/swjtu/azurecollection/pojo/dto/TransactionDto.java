@@ -12,7 +12,7 @@ public class TransactionDto {
 
     private Long sellerId;
 
-    private LocalDateTime transactionDate;
+    private String transactionDate;
 
 
     // 新增的两个布尔型变量
@@ -53,12 +53,20 @@ public class TransactionDto {
         this.sellerId = sellerId;
     }
 
-    public LocalDateTime getTransactionDate() {
+    public String getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(LocalDateTime transactionDate) {
+    public void setTransactionDate(String transactionDate) {
         this.transactionDate = transactionDate;
+    }
+
+    public void setIfReadByBuyer(Integer ifReadByBuyer) {
+        this.ifReadByBuyer = ifReadByBuyer;
+    }
+
+    public void setIfReadBySeller(Integer ifReadBySeller) {
+        this.ifReadBySeller = ifReadBySeller;
     }
 
     public int getIfReadByBuyer() {
