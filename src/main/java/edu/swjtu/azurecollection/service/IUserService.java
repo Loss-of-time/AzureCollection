@@ -2,7 +2,6 @@ package edu.swjtu.azurecollection.service;
 
 import edu.swjtu.azurecollection.pojo.User;
 import edu.swjtu.azurecollection.pojo.dto.UserLoginDto;
-import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
 import java.util.Optional;

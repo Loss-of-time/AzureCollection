@@ -1,6 +1,4 @@
 package edu.swjtu.azurecollection.pojo.dto;
-
-
 import java.time.LocalDateTime;
 
 public class TransactionDto {

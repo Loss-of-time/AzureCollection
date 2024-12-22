@@ -1,7 +1,6 @@
 package edu.swjtu.azurecollection.pojo;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Table(name="Tansaction")
 @Entity
