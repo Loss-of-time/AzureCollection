@@ -9,11 +9,14 @@ version = "0.0.1-SNAPSHOT"
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        JavaLanguageVersion.current().asInt() >= 21;
     }
 }
 
 repositories {
+    maven {
+        url = uri("https://maven.aliyun.com/repository/public/")
+    }
     mavenCentral()
 }
 
