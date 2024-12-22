@@ -37,6 +37,9 @@ public class TransactionController {
     //change
     @PutMapping("/change")
     public ResponseMessage<Transaction> edit(@Validated @RequestBody TransactionDto transaction) {
+
+        System.out.println("Received transaction date controller layer change: " + transaction.getTransactionDate());
+
         Transaction newTrans=transactionServices.edit(transaction);
         return ResponseMessage.success(newTrans);
     }
