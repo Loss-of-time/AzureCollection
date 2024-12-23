@@ -137,4 +137,6 @@ public class User {
         // TODO 实现blockchainId生成逻辑
         return "blockchain" + System.currentTimeMillis();
     }
+
+
 }
